@@ -1,0 +1,96 @@
+/*
+	Description: Hanoi kulesi uygulaması.
+	Author: Uğur Dalkıran
+	Author URI: https://ugurdalkiran.com/
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Muli:800&subset=latin-ext');
+*{padding:0;margin:0;border:0}
+body{margin:0px;background:#f7f7f7}
+ul, li, p, h1, h2, h3, h4{list-style:none;padding:0;margin:0}
+input, select, textarea, button{outline:none;border:none}
+
+.kapsaUst{background:#fff;padding:20px;margin:40px auto 0px auto;box-shadow:0px 1px 5px rgba(0,0,0, 0.1);width:1060px;display:flex;flex-wrap:wrap}
+.kapsaUst a{margin-left:20px;color:#fff;text-decoration:none;border-radius:4px;padding:10px;flex:1;text-align:center;font:normal 800 15px 'Muli';box-shadow:inset 0px 0px 12px 2px rgba(0,0,0, 0.2)}
+.kapsaUst a:nth-child(1){margin-left:0px;background:#ff8080}
+.kapsaUst a:nth-child(2){background:#00ffff}
+.kapsaUst a:nth-child(3){background:#6ef139}
+.kapsaUst a:nth-child(4){background:#e74c3c}
+.kapsaUst a:nth-child(5){background:#34495e}
+.kapsaUst a:nth-child(6){background:#a3b2c2}
+.kapsaUst a:nth-child(7){background:#2b73ba}
+.kapsaUst a:nth-child(8){background:#ff2083}
+
+.kapsaUst a:hover{opacity:0.7}
+
+/**/
+
+.kapsa{background:#fff;padding:40px;margin:20px auto;box-shadow:0px 1px 5px rgba(0,0,0, 0.1);width:1020px;display:flex;flex-wrap:wrap;align-items:flex-start}
+
+.kuleler{display:flex;flex-wrap:wrap;width:calc(100% - 40px - 240px);margin-left:40px}
+
+.kuleTek{background:#f9f9f9;margin-left:40px;width:calc((100% - 80px) / 3);height:340px;border-bottom:4px solid #000;position:relative;display:flex;flex-direction:column-reverse;justify-content:flex-start;align-items:center}
+
+.kuleTek:before{content:'';display:block;width:4px;height:100%;background:#000;position:absolute;top:0px;left:calc(50% - 2px)}
+.kuleTek:first-child{margin-left:0px}
+
+.kule_A:after{content:'A';display:block;background:#2c3e50;position:absolute;top:8px;left:8px;font:normal 500 14px 'Roboto';color:#fff;width:32px;height:32px;border-radius:16px;display:flex;justify-content:center;align-items:center}
+.kule_B:after{content:'B';display:block;background:#2c3e50;position:absolute;top:8px;left:8px;font:normal 500 14px 'Roboto';color:#fff;width:32px;height:32px;border-radius:16px;display:flex;justify-content:center;align-items:center}
+.kule_C:after{content:'C';display:block;background:#2c3e50;position:absolute;top:8px;left:8px;font:normal 500 14px 'Roboto';color:#fff;width:32px;height:32px;border-radius:16px;display:flex;justify-content:center;align-items:center}
+
+.kutu{height:36px;position:relative;box-shadow:inset 0px 0px 12px 2px rgba(0,0,0, 0.2);z-index:99999}
+
+.kutu8{background:#ff2083;width:200px}
+.kutu7{background:#2b73ba;width:180px}
+.kutu6{background:#a3b2c2;width:160px}
+.kutu5{background:#34495e;width:140px}
+.kutu4{background:#e74c3c;width:120px}
+.kutu3{background:#6ef139;width:100px}
+.kutu2{background:#00ffff;width:80px}
+.kutu1{background:#ff8080;width:60px}
+
+.kutu:after{position:absolute;top:0px;left:0px;display:flex;width:100%;height:100%;justify-content:center;align-items:center;font:normal 700 15px 'Roboto';color:#fff}
+.kutu1:after{content:'1'}
+.kutu2:after{content:'2'}
+.kutu3:after{content:'3'}
+.kutu4:after{content:'4'}
+.kutu5:after{content:'5'}
+.kutu6:after{content:'6'}
+.kutu7:after{content:'7'}
+.kutu8:after{content:'8'}
+
+.adimlar{width:240px;display:flex;flex-wrap:wrap;max-height:344px}
+.adimlar li{width:calc(240px / 4);font:normal 500 13px 'Roboto';color:#666;background:#f9f9f9;box-shadow:0px 0px 0px 1px #e0e0e0;display:flex;justify-content:center;align-items:center;padding:5px 0px}
+.adimlar li.gec{background:#2ecc71;color:#fff}
+
+.adimlar.overlay{background:red;overflow:overlay;border:1px solid #e0e0e0;width:238px}
+.adimlar.overlay li{width:calc(238px / 4)}
+
+.adimlar::-webkit-scrollbar{background:#eee;width:6px}
+.adimlar::-webkit-scrollbar-thumb{background:#bcbcbc}
+.adimlar::-webkit-scrollbar-thumb:hover{background:#aaaaab}
+
+/**/
+
+.kapsaAlt{background:#fff;padding:40px;margin:0px auto;box-shadow:0px 1px 5px rgba(0,0,0, 0.1);width:1020px}
+
+.run{background:#2ecc71;font:normal 800 20px 'Muli';color:#fff;border-radius:4px;padding:16px;text-align:center;cursor:pointer;width:300px;margin:0px auto}
+.run:hover{background:#27ae60}
+
+/**/
+
+.opacityOlus{animation:opacityOlus 0.25s ease-in-out 1}
+@keyframes opacityOlus{ 0% { opacity:0 } 100% { opacity:1 } }
+
+.opacitySil{animation:opacitySil 0.25s ease-in-out 1;opacity:0}
+@keyframes opacitySil{ 0% { opacity:1 } 100% { opacity:0 } }
+
+/**/
+
+.info p{font:normal 400 15px 'Roboto';color:#555;margin-bottom:20px;text-align:center}
+.info p b{font-weight:700}
+
+.ugurdalkiran{width:1100px;margin:0px auto;display:flex;justify-content:flex-end}
+.ugurdalkiran a{text-decoration:none;font:normal 400 13px 'Roboto';color:#999;margin-top:10px;display:block}
+.ugurdalkiran a:hover{opacity:0.7}
